@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution of Technology Timeline</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Olympic-Themed Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #FFFFFF; /* White background */
+            color: #333333; /* Dark gray text */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #005EB8, #FFD700, #E4002B); /* Olympic Blue to Gold to Red */
+            color: #fff;
+            transition: background 0.3s ease;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            opacity: 0; /* Start hidden for animation */
+            transform: translateY(-20px); /* Slide in effect */
+            animation: slideIn 0.5s forwards; /* Slide in animation */
+        }
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .navbar:hover {
+            background: linear-gradient(90deg, #E4002B, #FFD700, #005EB8); /* Reverse gradient on hover */
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease; /* Scale effect */
+        }
+        .navbar-brand:hover {
+            transform: scale(1.1); /* Scale up on hover */
+        }
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease; /* Color and scale effect */
+        }
+        .nav-link:hover {
+            color: #FFD700; /* Change color on hover */
+            transform: scale(1.1); /* Scale up on hover */
+        }
+        .timeline {
+            position: relative;
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 1000px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #FFD700; /* Gold line */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            margin: 20px 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.6s ease-in-out;
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .timeline-item .content {
+            padding: 20px;
+            background: #fff; /* White background for content */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        .timeline-item.left .content {
+            text-align: right;
+            margin-right: calc(50% + 10px);
+        }
+        .timeline-item.right .content {
+            text-align: left;
+            margin-left: calc(50% + 10px);
+        }
+        .timeline-item .year {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #E4002B; /* Olympic Red for year */
+        }
+        .timeline-item .description {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .timeline-item .btn {
+            margin-top: 10px;
+            background-color: #005EB8; /* Olympic Blue button */
+            color: #fff;
+            border: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .timeline-item .btn:hover {
+            transform: scale(1.1);
+            background-color: #FFD700; /* Gold on hover */
+        }
+        .timeline-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+            transition: transform 0.3s ease;
+        }
+        .timeline-item img:hover {
+            transform: scale(1.05);
+        }
+        .timeline-item .animated-icon {
+            font-size: 2rem;
+            color: #005EB8; /* Olympic Blue for icons */
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline {
+                padding: 10px;
+            }
+            .timeline::before {
+                left: 20px;
+            }
+            .timeline-item .content {
+                margin: 0 40px;
+                text-align: left;
+            }
+            .timeline-item.left .content,
+            .timeline-item.right .content {
+                margin: 10px 30px;
+            }
+            .timeline-item img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            .timeline-item .content {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Olympic Timeline</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="timeline">
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item left">
+            <div class="content">
+                <div class="year">1981</div>
+                <div class="title">Introduction of the Personal Computer</div>
+                <div class="description">IBM launches the first personal computer, paving the way for modern computing. This event marked a significant milestone in the history of technology, allowing individuals to have computing power at their fingertips.</div>
+                <i class="fas fa-laptop animated-icon"></i>
+                <img src="/mnt/data/image.png" alt="Personal Computer">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#learnMoreModal" onclick="setModalContent('IBM launches the first personal computer, paving the way for modern computing. This event marked a significant milestone in the history of technology, allowing individuals to have computing power at their fingertips.')">Learn More</button>
+            </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="timeline-item right">
+            <div class="content">
+                <div class="year">1991</div>
+                <div class="title">Birth of the World Wide Web</div>
+                <div class="description">Tim Berners-Lee introduces the World Wide Web, connecting the world like never before. This innovation transformed how information is shared and accessed, leading to the digital age we live in today.</div>
+                <i class="fas fa-globe animated-icon"></i>
+                <img src="https://via.placeholder.com/600x400" alt="World Wide Web">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#learnMoreModal" onclick="setModalContent('Tim Berners-Lee introduces the World Wide Web, which revolutionized how we access and share information globally. This innovation transformed how information is shared and accessed, leading to the digital age we live in today.')">Learn More</button>
+            </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="timeline-item left">
+            <div class="content">
+                <div class="year">2007</div>
+                <div class="title">The Smartphone Revolution</div>
+                <div class="description">Apple releases the iPhone, revolutionizing mobile technology and app ecosystems. This device changed the way we communicate, work, and entertain ourselves, making smartphones an essential part of daily life.</div>
+                <i class="fas fa-mobile-alt animated-icon"></i>
+                <img src="https://via.placeholder.com/600x400" alt="Smartphone">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#learnMoreModal" onclick="setModalContent('The release of the iPhone marked the beginning of the smartphone revolution, changing how we communicate and interact with technology. This device changed the way we communicate, work, and entertain ourselves, making smartphones an essential part of daily life.')">Learn More</button>
+            </div>
+        </div>
+
+        <!-- New Timeline Item 4 -->
+        <div class="timeline-item right">
+            <div class="content">
+                <div class="year">2010</div>
+                <div class="title">Rise of Social Media</div>
+                <div class="description">Platforms like Facebook, Twitter, and Instagram gain popularity, changing how people connect and share information. Social media has become a powerful tool for communication, marketing, and social movements.</div>
+                <i class="fas fa-users animated-icon"></i>
+                <img src="https://via.placeholder.com/600x400" alt="Social Media">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#learnMoreModal" onclick="setModalContent('Platforms like Facebook, Twitter, and Instagram gain popularity, changing how people connect and share information. Social media has become a powerful tool for communication, marketing, and social movements.')">Learn More</button>
+            </div>
+        </div>
+
+        <!-- New Timeline Item 5 -->
+        <div class="timeline-item left">
+            <div class="content">
+                <div class="year">2021</div>
+                <div class="title">Expansion of Remote Work</div>
+                <div class="description">The COVID-19 pandemic accelerates the adoption of remote work technologies, leading to a significant shift in workplace dynamics. Companies and employees adapt to new ways of working, utilizing tools like Zoom and Slack.</div>
+                <i class="fas fa-laptop-house animated-icon"></i>
+                <img src="https://via.placeholder.com/600x400" alt="Remote Work">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#learnMoreModal" onclick="setModalContent('The COVID-19 pandemic accelerates the adoption of remote work technologies, leading to a significant shift in workplace dynamics. Companies and employees adapt to new ways of working, utilizing tools like Zoom and Slack.')">Learn More</button>
+            </div>
+        </div>
+
+        <!-- New Timeline Item 6 -->
+        <div class="timeline-item right">
+            <div class="content">
+                <div class="year">2023</div>
+                <div class="title">Advancements in AI</div>
+                <div class="description">AI technologies, including ChatGPT, transform industries with intelligent automation. These advancements are reshaping how businesses operate, enhancing productivity, and creating new opportunities for innovation.</div>
+                <i class="fas fa-robot animated-icon"></i>
+                <img src="https://via.placeholder.com/600x400" alt="Artificial Intelligence">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#learnMoreModal" onclick="setModalContent('AI technologies, including ChatGPT, are transforming industries by enabling intelligent automation and enhancing decision-making processes. These advancements are reshaping how businesses operate, enhancing productivity, and creating new opportunities for innovation.')">Learn More</button>
+            </div>
+ </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="learnMoreModal" tabindex="-1" aria-labelledby="learnMoreModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title " id="learnMoreModalLabel">More Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Content will be injected here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const items = document.querySelectorAll(".timeline-item");
+
+            const revealItems = () => {
+                items.forEach((item) => {
+                    const rect = item.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        item.classList.add("visible");
+                    }
+                });
+            };
+
+            window.addEventListener("scroll", revealItems);
+            revealItems();
+        });
+
+        function setModalContent(content) {
+            document.getElementById('modalBody').innerHTML = content;
+        }
+    </script>
+</body>
+</html>
+```
